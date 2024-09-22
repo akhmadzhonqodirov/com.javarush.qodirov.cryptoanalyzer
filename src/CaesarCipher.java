@@ -13,8 +13,12 @@ import java.util.Scanner;
 public class CaesarCipher {
     // Здесь у нас создаётся экземпляр класса Alphabet для работы с алфавитом, используемым в шифре Цезаря
     private final Alphabet alphabet = new Alphabet();
-        // Наш метод main, который будет запрашивать у пользователя одно из 7 действий.
-        // От себя я добавил отображение содержимого входных и выходных файлов, пункты 5-6
+        // Наш метод main, который будет запрашивать у пользователя одно из 8 действий.
+        // От себя я добавил отображение содержимого входных и выходных файлов, пункты 5-7
+    private static final String INPUT_FILE = "src/input.txt";
+    private static final String OUTPUT_FILE = "src/output.txt";
+    private static final String DECRYPTED_FILE = "src/decrypted_output.txt";
+    private static final String STATISTICAL_FILE = "src/statistics.txt";
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         CaesarCipher cipher = new CaesarCipher();
@@ -66,8 +70,8 @@ public class CaesarCipher {
 // Метод, который непосредственно шифрует содержимое входного файла и записывает зашифрованные данные
     // в файл output.txt
     private static void encrypt(Scanner scanner, CaesarCipher cipher) {
-        String inputFile = "src/input.txt";
-        String outputFile = "src/output.txt";
+        String inputFile = INPUT_FILE;
+        String outputFile = OUTPUT_FILE;
         System.out.print("Введите ключ (1-33): ");
         int key = Integer.parseInt(scanner.nextLine());
 
@@ -81,8 +85,8 @@ public class CaesarCipher {
     }
     // Метод, который непосредственно дешифрует содержимое файла output.txt
     private static void decrypt(Scanner scanner, CaesarCipher cipher) {
-        String inputFile = "src/output.txt";
-        String outputFile = "src/decrypted_output.txt"; // Изменен на отдельный файл
+        String inputFile = OUTPUT_FILE;
+        String outputFile = DECRYPTED_FILE; // Изменен на отдельный файл
         System.out.print("Введите ключ (1-33): ");
 
         try {
@@ -105,7 +109,7 @@ public class CaesarCipher {
     //Здесь я создал метод bruteForce, который запрашивает у пользователя имена входного (input.txt) и выходного файлов (output.txt), а также выполняет расшифровку
     // с перебором всех возможных ключей, используя метод bruteForce класса CaesarCipher
     private static void bruteForce(Scanner scanner, CaesarCipher cipher) {
-        String inputFile = "src/output.txt";
+        String inputFile = OUTPUT_FILE;
         String outputFile = "src/output_brute.txt";
 
         try {
@@ -119,8 +123,8 @@ public class CaesarCipher {
 // Здесь у нас происходит статистический анализ, который запрашивает у пользователя имена входного и выходного файлов и выполняет статистический анализ,
 //// который подсчитывает частоту появления символов в тексте, используя метод statisticalAnalysis класса CaesarCipher.
     private static void statisticalAnalysis(Scanner scanner, CaesarCipher cipher) {
-        String inputFile = "src/input.txt";
-        String outputFile = "statistical_analysis.txt";
+        String inputFile = INPUT_FILE;
+        String outputFile = STATISTICAL_FILE;
 
         try {
             cipher.validateInput(inputFile);
@@ -132,7 +136,7 @@ public class CaesarCipher {
     }
 // Здесь я создал метод, который отображает содержимое входного файла input.txt
     private static void displayInputFileData(Scanner scanner) {
-        String inputFile = "src/input.txt";
+        String inputFile = INPUT_FILE;
 
         try {
             String content = new String(Files.readAllBytes(Paths.get(inputFile)));
@@ -144,7 +148,7 @@ public class CaesarCipher {
     }
     // Здесь я создал метод, который отображает содержимое выходного файла output.txt
     private static void displayOutputFileData(Scanner scanner) {
-        String outputFile = "src/output.txt";
+        String outputFile = OUTPUT_FILE;
 
         try {
             String content = new String(Files.readAllBytes(Paths.get(outputFile)));
@@ -157,7 +161,7 @@ public class CaesarCipher {
         }
     }
     private static void displayOutputOfDecryptedFileData(Scanner scanner) {
-        String outputFile = "src/decrypted_output.txt";
+        String outputFile = DECRYPTED_FILE;
 
         try {
             String content = new String(Files.readAllBytes(Paths.get(outputFile)));
