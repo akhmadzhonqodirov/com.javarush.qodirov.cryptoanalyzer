@@ -15,10 +15,11 @@ public class CaesarCipher {
     private final Alphabet alphabet = new Alphabet();
         // Наш метод main, который будет запрашивать у пользователя одно из 8 действий.
         // От себя я добавил отображение содержимого входных и выходных файлов, пункты 5-7
-    private static final String INPUT_FILE = "src/input.txt";
-    private static final String OUTPUT_FILE = "src/output.txt";
-    private static final String DECRYPTED_FILE = "src/decrypted_output.txt";
-    private static final String STATISTICAL_FILE = "src/statistics.txt";
+    private static final String INPUT_FILE = "src/data/input/input.txt";
+    private static final String OUTPUT_FILE = "src/data/output/output.txt";
+    private static final String DECRYPTED_FILE = "src/data/decrypted_output/decrypted_output.txt";
+    private static final String STATISTICAL_FILE = "src/data/statistics/statistics.txt";
+    private static final String OUTPUT_BRUTEFORCE_FILE = "src/data/output_bruteforce/output_bruteforce.txt";
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         CaesarCipher cipher = new CaesarCipher();
@@ -44,19 +45,19 @@ public class CaesarCipher {
                     decrypt(scanner, cipher);
                     break;
                 case "3":
-                    bruteForce(scanner, cipher);
+                    bruteForce(cipher);
                     break;
                 case "4":
-                    statisticalAnalysis(scanner, cipher);
+                    statisticalAnalysis(cipher);
                     break;
                 case "5":
-                    displayInputFileData(scanner);
+                    displayInputFileData();
                     break;
                 case "6":
-                    displayOutputFileData(scanner);
+                    displayOutputFileData();
                     break;
                 case "7":
-                    displayOutputOfDecryptedFileData(scanner);
+                    displayOutputOfDecryptedFileData();
                     break;
                 case "0":
                     System.out.println("Выход из программы.");
@@ -108,21 +109,21 @@ public class CaesarCipher {
     }
     //Здесь я создал метод bruteForce, который запрашивает у пользователя имена входного (input.txt) и выходного файлов (output.txt), а также выполняет расшифровку
     // с перебором всех возможных ключей, используя метод bruteForce класса CaesarCipher
-    private static void bruteForce(Scanner scanner, CaesarCipher cipher) {
+    private static void bruteForce(CaesarCipher cipher) {
         String inputFile = OUTPUT_FILE;
-        String outputFile = "src/output_brute.txt";
+        String outputFile = OUTPUT_BRUTEFORCE_FILE;
 
         try {
             cipher.validateInput(inputFile);
             cipher.bruteForce(inputFile, outputFile);
-            System.out.println("Brute force завершено.");
+            System.out.println("Brute force успешно завершён!!!");
         } catch (Exception e) {
             System.out.println("Ошибка: " + e.getMessage());
         }
     }
 // Здесь у нас происходит статистический анализ, который запрашивает у пользователя имена входного и выходного файлов и выполняет статистический анализ,
 //// который подсчитывает частоту появления символов в тексте, используя метод statisticalAnalysis класса CaesarCipher.
-    private static void statisticalAnalysis(Scanner scanner, CaesarCipher cipher) {
+    private static void statisticalAnalysis(CaesarCipher cipher) {
         String inputFile = INPUT_FILE;
         String outputFile = STATISTICAL_FILE;
 
@@ -135,7 +136,7 @@ public class CaesarCipher {
         }
     }
 // Здесь я создал метод, который отображает содержимое входного файла input.txt
-    private static void displayInputFileData(Scanner scanner) {
+    private static void displayInputFileData() {
         String inputFile = INPUT_FILE;
 
         try {
@@ -147,7 +148,7 @@ public class CaesarCipher {
         }
     }
     // Здесь я создал метод, который отображает содержимое выходного файла output.txt
-    private static void displayOutputFileData(Scanner scanner) {
+    private static void displayOutputFileData() {
         String outputFile = OUTPUT_FILE;
 
         try {
@@ -160,7 +161,7 @@ public class CaesarCipher {
             System.out.println("Ошибка: " + e.getMessage());
         }
     }
-    private static void displayOutputOfDecryptedFileData(Scanner scanner) {
+    private static void displayOutputOfDecryptedFileData() {
         String outputFile = DECRYPTED_FILE;
 
         try {
