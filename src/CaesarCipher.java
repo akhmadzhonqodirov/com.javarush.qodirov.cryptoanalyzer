@@ -205,11 +205,11 @@ public class CaesarCipher {
     }
 
     private String readFile(String filePath) throws IOException {
-        return new String(Files.readAllBytes(Paths.get(filePath)), StandardCharsets.UTF_8);
+        return Files.readString(Paths.get(filePath), StandardCharsets.UTF_8);
     }
 
     private void writeFile(String filePath, String text) throws IOException {
-        Files.write(Paths.get(filePath), text.getBytes(StandardCharsets.UTF_8));
+        Files.writeString(Paths.get(filePath), text, StandardCharsets.UTF_8);
     }
 
     private void validateInput(String filePath) throws FileNotFoundException {
