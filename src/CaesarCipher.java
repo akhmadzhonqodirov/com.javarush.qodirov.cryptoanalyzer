@@ -71,14 +71,12 @@ public class CaesarCipher {
 // Метод, который непосредственно шифрует содержимое входного файла и записывает зашифрованные данные
     // в файл output.txt
     private static void encrypt(Scanner scanner, CaesarCipher cipher) {
-        String inputFile = INPUT_FILE;
-        String outputFile = OUTPUT_FILE;
         System.out.print("Введите ключ (1-33): ");
         int key = Integer.parseInt(scanner.nextLine());
 
         try {
-            cipher.validateInput(inputFile);
-            cipher.encrypt(inputFile, outputFile, key);
+            cipher.validateInput(INPUT_FILE);
+            cipher.encrypt(INPUT_FILE, OUTPUT_FILE, key);
             System.out.println("Шифрование завершено.");
         } catch (Exception e) {
             System.out.println("Ошибка: " + e.getMessage());
@@ -110,12 +108,9 @@ public class CaesarCipher {
     //Здесь я создал метод bruteForce, который запрашивает у пользователя имена входного (input.txt) и выходного файлов (output.txt), а также выполняет расшифровку
     // с перебором всех возможных ключей, используя метод bruteForce класса CaesarCipher
     private static void bruteForce(CaesarCipher cipher) {
-        String inputFile = OUTPUT_FILE;
-        String outputFile = OUTPUT_BRUTEFORCE_FILE;
-
         try {
-            cipher.validateInput(inputFile);
-            cipher.bruteForce(inputFile, outputFile);
+            cipher.validateInput(OUTPUT_FILE);
+            cipher.bruteForce(OUTPUT_FILE, OUTPUT_BRUTEFORCE_FILE);
             System.out.println("Brute force успешно завершён!!!");
         } catch (Exception e) {
             System.out.println("Ошибка: " + e.getMessage());
@@ -124,12 +119,9 @@ public class CaesarCipher {
 // Здесь у нас происходит статистический анализ, который запрашивает у пользователя имена входного и выходного файлов и выполняет статистический анализ,
 //// который подсчитывает частоту появления символов в тексте, используя метод statisticalAnalysis класса CaesarCipher.
     private static void statisticalAnalysis(CaesarCipher cipher) {
-        String inputFile = INPUT_FILE;
-        String outputFile = STATISTICAL_FILE;
-
         try {
-            cipher.validateInput(inputFile);
-            cipher.statisticalAnalysis(inputFile, outputFile);
+            cipher.validateInput(INPUT_FILE);
+            cipher.statisticalAnalysis(INPUT_FILE, STATISTICAL_FILE);
             System.out.println("Статистический анализ завершен.");
         } catch (Exception e) {
             System.out.println("Ошибка: " + e.getMessage());
@@ -137,10 +129,8 @@ public class CaesarCipher {
     }
 // Здесь я создал метод, который отображает содержимое входного файла input.txt
     private static void displayInputFileData() {
-        String inputFile = INPUT_FILE;
-
         try {
-            String content = new String(Files.readAllBytes(Paths.get(inputFile)));
+            String content = new String(Files.readAllBytes(Paths.get(INPUT_FILE)));
             System.out.println("Содержимое входного файла:");
             System.out.println(content);
         } catch (IOException e) {
@@ -149,10 +139,8 @@ public class CaesarCipher {
     }
     // Здесь я создал метод, который отображает содержимое выходного файла output.txt
     private static void displayOutputFileData() {
-        String outputFile = OUTPUT_FILE;
-
         try {
-            String content = new String(Files.readAllBytes(Paths.get(outputFile)));
+            String content = new String(Files.readAllBytes(Paths.get(OUTPUT_FILE)));
             System.out.println("Содержимое выходного файла:");
             System.out.println("=======================================");
             System.out.println(content);
@@ -162,10 +150,8 @@ public class CaesarCipher {
         }
     }
     private static void displayOutputOfDecryptedFileData() {
-        String outputFile = DECRYPTED_FILE;
-
         try {
-            String content = new String(Files.readAllBytes(Paths.get(outputFile)));
+            String content = new String(Files.readAllBytes(Paths.get(DECRYPTED_FILE)));
             System.out.println("Содержимое выходного расшифрованного файла:");
             System.out.println("=======================================");
             System.out.println(content);
